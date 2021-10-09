@@ -29,9 +29,25 @@
   [args]
   (if (= true (get args "FLATPAK"))
     (os/setenv "BUILD_PATH" "/app/")
-    (os/setenv "BUILD_PATH" "/usr/")))
+    (os/setenv "BUILD_PATH" "/usr/local/")))
 
 (defn get-build-path
   "A function that retrieves the build path"
   []
   (os/getenv "BUILD_PATH"))
+
+(defn green-string
+  "A function that colors a string to green"
+  [str]
+  (string "\u001b[32;1m" str "\u001b[0m"))
+
+(defn set-project
+  "A function that takes an array with all the project's information"
+  [proj sources]
+  (print (green-string (string "----------" (get proj :name) "-Toolchain------")))
+  (print (string "Author: " (green-string (get proj :author))))
+  (print (string "License: " (green-string (get proj :license))))
+  (print (string "Language: " (green-string (get proj :language))))
+  (print (string "URL: " (green-string (get proj :url))))
+  (print (string "Sources: " (green-string (string "|" (string/join sources "|") "|"))))
+  (print (green-string "--------------------")))
