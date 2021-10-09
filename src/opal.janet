@@ -24,3 +24,14 @@
   []
   (os/cd ".."))
 
+(defn set-build-path
+  "A function that sets the build path according to the variable given"
+  [args]
+  (if (= true (get args "FLATPAK"))
+    (os/setenv "BUILD_PATH" "/app/")
+    (os/setenv "BUILD_PATH" "/usr/")))
+
+(defn get-build-path
+  "A function that retrieves the build path"
+  []
+  (os/getenv "BUILD_PATH"))
